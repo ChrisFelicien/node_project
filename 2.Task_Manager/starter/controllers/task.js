@@ -47,10 +47,7 @@ exports.updataTask = asyncWrapper(async (req, res, next) => {
   });
 
   if (!task)
-    return res.status(404).json({
-      status: "Fail",
-      message: `No task wi the ID: ${taskId}`,
-    });
+    return next(createCustomError(`No task wi the ID: ${taskId}`, 404));
 
   return res.status(200).json({
     status: "success",
@@ -65,10 +62,7 @@ exports.deleteTask = asyncWrapper(async (req, res, next) => {
   const task = await Task.findByIdAndDelete(taskId);
 
   if (!task) {
-    return res.status(500).json({
-      status: "fail",
-      message: `No task with ID: ${taskId}`,
-    });
+    return next(createCustomError(`No task wi the ID: ${taskId}`, 404));
   }
   return res.status(202).json({
     status: "success",
