@@ -3,7 +3,7 @@ const Task = require("../Model/task");
 exports.getAllTaks = async (req, res) => {
   try {
     const tasks = await Task.find();
-    res.json({
+    res.status(200).json({
       status: "Success",
       result: tasks.length,
       data: {
@@ -70,7 +70,10 @@ exports.createTaks = async (req, res) => {
 exports.updataTask = async (req, res) => {
   try {
     const taskId = req.params.id;
-    const task = await Task.findByIdAndUpdate(taskId, req.body, { new: true });
+    const task = await Task.findByIdAndUpdate(taskId, req.body, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!task)
       return res.status(404).json({
