@@ -4,6 +4,7 @@ const express = require("express");
 const connectDB = require("./utils/connectDB");
 const tasksRoute = require("./routes/task");
 const pageNotFound = require("./middlewares/pageNotFound");
+const errorHandler = require("./middlewares/errorHandler");
 
 const app = express();
 
@@ -13,7 +14,8 @@ app.use(express.json());
 
 // Routes
 app.use("/api/v1/tasks", tasksRoute);
-app.use("*", pageNotFound);
+app.use(pageNotFound);
+app.use(errorHandler);
 
 const port = process.env.PORT || 3000;
 
