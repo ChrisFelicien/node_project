@@ -13,7 +13,7 @@ const ProductSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  compagny: {
+  company: {
     type: String,
     enum: {
       values: ["marcos", "liddy", "ikea", "caressa"],
